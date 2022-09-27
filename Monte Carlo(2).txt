@@ -1,0 +1,57 @@
+# Improved Monte Carlo, using Gausssian distrubuted investment returns as sample data.
+# Online Python - IDE, Editor, Compiler, Interpreter
+import random
+import math
+x=5000 
+Return=122.4 
+Threshold=117
+Min= 62.4
+IntMin=92.4
+Max= 182.4
+IntMax=152.4
+a=range(x)
+p=0
+q=0
+s=0
+h=0
+g=0
+for i in a:
+    
+    if random.gauss(Return,30)<=Min:
+        q+=1
+        random.gauss(122.4,30)
+        print(q)
+        #print(random.gauss(18,6))
+        u = q/x
+        #print("At a return of",Return,"The chance of returns falling below the",Min,"threshold is",u)   
+    if random.gauss(Return,30)>=IntMin:
+        h+=1
+        random.gauss(122.4,30)
+        print(h)
+        #print(random.gauss(18,6))
+        l = h/x
+        #print("At a return of",Return,"The chance of returns falling below the",IntMin,"threshold is",l) 
+    if random.gauss(Return,30)<=Threshold:
+        p+=1
+        random.gauss(122.4,30)
+        print(p)
+        #print(random.gauss(18,6))
+        f = p/x
+        #print("At a return of",Return,"The chance of returns falling below the",Threshold ,"threshold is",f)
+            
+    if random.gauss(Return,30)>=IntMax:
+        g+=1
+        random.gauss(122.4,30)
+        print(g)
+        #print(random.gauss(18,6))
+        w = g/x
+        #print("At a return of",Return,"The chance of returns falling below the",Max ,"threshold is",w) 
+    if random.gauss(Return,30)<=Max:
+        s+=1
+        random.gauss(122.4,30)
+        print(s)
+        #print(random.gauss(18,6))
+        v = s/x
+        #print("At a return of",Return,"The chance of returns falling below the",Max ,"threshold is",v) 
+        
+print("Min",v ,"%", "IntMin",l ,"%","Threshold", 1-f,"%","IntMax",w ,"%", "Max",u, "%") 
