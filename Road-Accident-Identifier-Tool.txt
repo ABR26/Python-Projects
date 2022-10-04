@@ -1,0 +1,55 @@
+# Using a sample of the accelerometer x, y, z data (50 lines).
+# Purpose of code is to identify big rates of change in the data series, take an 
+# average of the absolute value of the change accross the three given dimensions for 
+# each time slice, and use a normal distribution to filter 3 sigma and 4 sigma events as possible accidents. 
+# As with any series the tool will become more stable once its has filtered over a large enough (5000+) training set.
+import statistics
+import numpy
+x = (-0.42355347,-0.47964478,-0.41870117,-0.41542053,-0.44108582,-0.43711853,-0.40396118,-0.4902649
+-0.45669556,-0.44418335,-0.44921875,-0.4743042,-0.4600525,-0.44441223,-0.41410828,-0.53297424,-0.41470337
+-0.49014282,-0.43476868,-0.4351654,-0.40625,-0.49699402,-0.41897583,-0.4666748,-0.42559814,-0.4485016
+-0.44836426,0.49601746,-0.44125366,-0.49884033,-0.4573059,-0.4782257,-0.50309753,-0.43678284,-0.49015808
+-0.45239258,-0.4348755,-0.515625,-0.42163086,-0.4588623,-0.44024658,-0.49121094,-0.49946594,-0.5073395
+-0.46025085,-0.4532318,-0.48190308,-0.42907715,-0.42071533,-0.51387024,-0.44078064)
+y = (-0.46620178,-0.53227234,-0.5296173,-0.4590912,-0.51556396,-0.4796753,-0.53131104,-0.5553436,-0.4719696
+-0.5028534,-0.6394348,-0.5345459,-0.5492554,-0.52568054,-0.52565,-0.5928192,-0.5223236,-0.5580139,-0.5483246
+-0.4864502,-0.5244446,-0.56069946,-0.5505066,-0.5108032,-0.5687256,-0.5063324,-0.5890045,-0.5309143,
+-0.542984,-0.5561676,-0.59591675,-0.57792664,-0.5835724,-0.53315735,-0.5844116,-0.56134033,-0.5111084
+-0.60601807,-0.59373474,-0.48280334,-0.5562897,-0.5458374,-0.6219635,-0.6141052,-0.60902405,-0.5168152
+-0.550354,-0.51989746,-0.5545349,-0.5975189,-0.5344696)
+z = (-0.68418884,-0.7284241,-0.63275146,-0.6542206,-0.6387329,-0.683197,-0.6377411,-0.65864563,-0.6299286
+-0.63648987,-0.708313,-0.72618103,-0.67266846,-0.6445465,-0.6190491,-0.72976685,-0.6263733,-0.68414307
+-0.6582947,-0.6493683,-0.68740845,-0.7419281,-0.6782532,-0.67033386,-0.6438904,-0.63679504,-0.7174072
+-0.6642761,-0.6665344,-0.6873779,-0.7106476,-0.6875305,-0.6896515,-0.6347351,-0.7298889,-0.63887024
+-0.6556244,-0.6919861,-0.62072754,-0.62117004,-0.6198578,-0.7180481,-0.68292236,-0.71032715,-0.61076355
+-0.62394714,-0.67503357,-0.6309509,-0.64663696,-0.7019043,-0.662796)
+List = []
+PossibleAccident = []
+ProbableAccident = []
+HighlyLikelyAccident = []
+a = 0
+a = int(a)
+while a < len(x)-1:
+    Value = (abs((x[a+1]/x[a]))+abs((y[a+1]/y[a]))+abs((z[a+1]/z[a])))/3
+    List.insert(len(List), Value)
+    print(List)
+    print("Maximum acceleration delta", max(List))
+    print("Minimum acceleration delta", min(List))
+    print("Average acceleration delta", statistics.mean(List))
+    a+=1
+for i in List:
+    if i > max(List)*0.7:
+        print("High Value",i)
+        print("List Standard Deviation is",numpy.std(List))
+    if i > (statistics.mean(List)+(numpy.std(List)*3)):   
+        print("Outlier and possible accident", i, List.index(i))
+        PossibleAccident.insert(len(List), (i, List.index(i)))
+        print("PossibleAccidents", PossibleAccident)
+    if i > (statistics.mean(List)+(numpy.std(List)*3.5)):   
+        print("Outlier and probable accident", i, List.index(i)) 
+        ProbableAccident.insert(len(List), (i, List.index(i)))
+        print("ProbableAccidents", ProbableAccidents)
+    if i > (statistics.mean(List)+(numpy.std(List)*4)):   
+        print("Outlier and highly likely to be an accident", i, List.index(i))
+        HighlyLikelyAccident.insert(len(List), (i, List.index(i)))
+        print("HighlyLikelyAccident", HighlyLikelyAccident)
