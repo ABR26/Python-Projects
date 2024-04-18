@@ -1,0 +1,82 @@
+Portfolio Simulation
+~
+Introduction
+
+One of the challenges facing money managers, family offices, pension fund trustees and other fiduciaries is the appropriate distribution of investments across the available financial assets classes.
+
+The demands which govern this decision making fall into three basic categories, namely: 
+
+1. The specific rules, regulations and legal stipulations on their fund.
+
+2. The time preferences, expectations and rights of the beneficiaries. 
+
+3. The exposure of the fund to what Mathematicians call distinctly, risk* and uncertainty**. 
+
+This exercise addresses the risk element of 3.
+
+Simulation methodology 
+
+Taking three categories or assets classes, namely Cash, Property and Equities, I will run simulations with 30 steps(years) each. Each portfolio will have 40 trials. 
+
+The results recorded will be average return (compared to a nominal starting value of 100), range, max, min values and the proportion of trials for each portfolio which dropped below 50(half).  
+
+The assets classes will have the following characteristics:
+
+Equity – Increases by 13% each year, then multiplied by a randomly generated value between 0 and 2(modelling high volatility).
+Cash   -  Decreases by 5% each year.     
+Property – Increases by 6.4% each year.
+
+Following each step the asset classes are rebalanced in accordance with the predefined portfolio weighting, and the process is repeated.
+This provides 1,200 discrete steps per portfolio simulation.
+
+Modelling assumptions/limitations:
+
+One rebalancing takes place per year and interest/compounding happens once per year.
+
+The risk from price action is normally distributed – this is almost never the case, an improvement on the model would be to use something more tail-biased like a Cauchy distribution. 
+
+All growth is net of inflation – this is implicit in the value of the cash portion dropping an arbitrary 5% each year.   
+
+Volatility is bounded to 2x the starting value at each step.
+
+
+Software 
+
+I have used Python and a standard compiler to run this simulation. The code is presented below. 
+
+
+import random
+x = 0
+List = [ ]
+Low = 0
+Cash = float(33.3)  # stating initial portfolio distribution
+Equity = float(33.3)
+Property = float(33.3)
+
+for i in range(0,40,1): # 40 trials
+    for x in range(0,30,1): # 30 steps per trial
+        Equity = Equity*(float(1.13))*((random.randint(1,200)/100)) # Introducing randomness
+        Cash = Cash*float(0.95)
+        Property = Property*float(1.064)
+        Value= Equity+Cash+Property 
+        Equity = float(Value/3) # Rebalancing
+        Cash = float(Value/3)
+        Property = float(Value/3)
+        print("Value",Value)
+        print("Cash",Cash,"Equity",Equity,"Property",Property)
+        x+=1
+        print(x)
+    if Value<50: # tracking trials which more than halve in value 
+        Low+=1
+    List.insert(0,Value)
+    Value = float(99.9) # restating global starting points for portfolio at the end of each trial 
+    Equity = float(33.3)
+    Cash = float(33.3)
+    Property = float(33.3)
+    Value = Equity+Cash+Property
+i+=1 # iterative step to initiate the next trial
+print("List",List)
+print("Low",Low)
+print("Mean",int(sum(List)/40),"Range",int(max(List), min(List)),"Max",int(max(List)),"Min",int(min(List)))
+ 
+
