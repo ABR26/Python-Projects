@@ -1,29 +1,45 @@
+# New Tax Calculator 10/3/25
+
+# Function to calculate income tax and National Insurance
+def calculate_tax_and_ni(gross_salary):
+    basic_allowance = 12500
+    higher_rate_threshold = 37500
+    national_insurance_threshold = 8788
+    
+    if gross_salary >= higher_rate_threshold:
+        income_tax = int((gross_salary * 0.4) - 15000) + 5000
+        ni_contribution = int((gross_salary - national_insurance_threshold) * 0.12)
+        tax_bracket = "higher"
+    elif basic_allowance < gross_salary < higher_rate_threshold:
+        income_tax = int((gross_salary * 0.2) - 2500)
+        ni_contribution = int((gross_salary - national_insurance_threshold) * 0.12)
+        tax_bracket = "lower"
+    else:
+        income_tax = 0
+        ni_contribution = int((gross_salary - national_insurance_threshold) * 0.12)
+        tax_bracket = "non-taxpayer"
+    
+    return income_tax, ni_contribution, tax_bracket
+
+# Gathering user input
+gross_salary = int(input('Please enter your gross salary: '))
+
+# Calculating tax and NI
+income_tax, ni_contribution, tax_bracket = calculate_tax_and_ni(gross_salary)
+
+# Displaying results
+if tax_bracket == "higher":
+    print(f'You are a higher rate taxpayer paying income tax of £{income_tax} p.a.')
+elif tax_bracket == "lower":
+    print(f'You are a lower rate taxpayer paying income tax of £{income_tax} p.a.')
+else:
+    print(f'You are not a taxpayer with a gross income of £{gross_salary} p.a.')
+
+print(f'Your National Insurance will be £{ni_contribution} p.a.')
+
+total_deductions_percentage = ((income_tax + ni_contribution) / gross_salary) * 100
+print(f'Your total deductions as a % of gross salary are: {total_deductions_percentage:.2f}%')
 
 
 
 
-
-#New Tax Calculator 31/3/21.#
-
-print('Please enter your gross salary')
-x= input()
-y = 37500
-y = int(y)
-x = int(x)
-z = 12500
-z = int(z)
-if x >=y:
-    print('You are a higher rate taxpayer paying income tax of £'+ str(int((x*0.4)-15000)+5000)+' p.a')
-    print('your National Insurance will be £' + str(int((x-8788)*0.12)))
-    print('Your total deductions as a % of gross salary are:')
-    print(((int((x*0.4)-15000)+5000)+int((x-8788)*0.12))/x*100 )
-elif z<x < y:
-    print('You are a lower rate taxpayer paying income tax of £'+ str(int((x*0.2)-2500))+' p.a')
-    print('your National Insurance will be £' + str(int((x-8788)*0.12))+' p.a')
-    print('Your total deductions as a % of gross salary are:')
-    print((int((x*0.2)-2500)+int((x-8788)*0.12))/x*100 )
-elif x<= z:    
-    print('you arent a taxpayer at gross income of £' + str(x)+' p.a')
-    print('your National Insurance will be £ ' + str(int((x-8788)*0.12))+' p.a')
-    print('Your total deductions as a % of gross salary are:')
-    print(int((x-8788)*0.12)/x*100 )
