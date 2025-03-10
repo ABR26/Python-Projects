@@ -1,79 +1,47 @@
-#Algorithm for using Gaussian naïve Bayes:
-#Deciding if an item is in category A or B based on inference.
-#Take two classicaly dimorphic traits as distributions, Height, & Waist to Hip ratio.
-#Calculate p.d.f values for each input based on assumed Gaussian distribution.
-#Evaluate the ratios of the two data point, giving a relative likelihood.
-# Is an individual a Man or Female based on their height and Waist hip ratio using population norms.
 import math
-#Height M 
-Sdev = 8
-#Indivduals Height
-x = 84.25
-u = 80
-#Height F
-Sdev2 = 8
-u2 = 63
-#Waist to Hip Ratio F 
-Sdev3 = 10
-#Indivduals W 2 H ratio
-q = 90
-q = float(q)
-u3 = 91
-u3 = float(u3)
-#Waist to Hip Ratio M 
-Sdev4 = 12
-u4 = 74
-u4= float(u4)
 
-def Gauss_pdf():
-    G1 = (6.2831)**0.5
-    G2 = G1*Sdev
-    G3 = 1/G2
-    G4 = -((x-u)**2)
-    G5 = 2*((Sdev**2))
-    G6 = G4/G5
-    G7 = 2.718281**G6
-    G8 = G3*G7 
-    #G1 = int(G1)
-    print('Male')
-    print(G8)
-    
-    AG1 = (6.2831)**0.5
-    AG2 = AG1*Sdev2
-    AG3 = 1/AG2
-    AG4 = -((x-u2)**2)
-    AG5 = 2*((Sdev2**2))
-    AG6 = AG4/AG5
-    AG7 = 2.718281**AG6
-    AG8 = AG3*AG7 
-    #G1 = int(G1)
-    print('Female')
-    print(AG8)
-    print('Based on their height this individual is',(G8)/(AG8),'times more likely to be a Man than a Woman')
+# Function to calculate the Gaussian PDF
+def gaussian_pdf(x, mean, stddev):
+    return (1 / (math.sqrt(2 * math.pi) * stddev)) * math.exp(-((x - mean) ** 2) / (2 * stddev ** 2))
 
-    h1 = (6.2831)**0.5
-    h2 = h1*Sdev3
-    h3 = 1/h2
-    h4 = -((q-u3)**2)
-    h5 = 2*((Sdev3**2))
-    h6 = h4/h5
-    h7 = 2.718281**h6
-    h8 = h3*h7 
-    #h1 = int(h1)
-    print('Male')
-    print(h8)
-    
-    k1 = (6.2831)**0.5
-    k2 = k1*Sdev4
-    k3 = 1/k2
-    k4 = -((q-u4)**2)
-    k5 = 2*((Sdev4**2))
-    k6 = k4/k5
-    k7 = 2.718281**k6
-    k8 = k3*k7 
-    #k1 = int(k1)
-    print('Female')
-    print(k8)
-    print('Based on their Waist to hip ratio this individual is',(h8)/(k8),'times more likely to be a Man than a Woman')
-    print('One average this individual is',((G8/AG8)+(h8/k8))/2,'times more likely to be a Man than a Woman ' )
-Gauss_pdf() 
+# Variables for Height and Waist-to-Hip Ratio
+# Male Height
+male_height_mean = 80
+male_height_stddev = 8
+male_height = 84.25
+
+# Female Height
+female_height_mean = 63
+female_height_stddev = 8
+
+# Male Waist-to-Hip Ratio
+male_wh_mean = 74
+male_wh_stddev = 12
+individual_wh = 90.0
+
+# Female Waist-to-Hip Ratio
+female_wh_mean = 91
+female_wh_stddev = 10
+
+# Calculate Gaussian PDF for Height
+male_height_pdf = gaussian_pdf(male_height, male_height_mean, male_height_stddev)
+female_height_pdf = gaussian_pdf(male_height, female_height_mean, female_height_stddev)
+
+# Calculate Gaussian PDF for Waist-to-Hip Ratio
+male_wh_pdf = gaussian_pdf(individual_wh, male_wh_mean, male_wh_stddev)
+female_wh_pdf = gaussian_pdf(individual_wh, female_wh_mean, female_wh_stddev)
+
+# Print results
+print('Based on height:')
+print(f'Male likelihood: {male_height_pdf:.6f}')
+print(f'Female likelihood: {female_height_pdf:.6f}')
+print(f'This individual is {male_height_pdf / female_height_pdf:.2f} times more likely to be a Man than a Woman based on height.')
+
+print('Based on Waist-to-Hip Ratio:')
+print(f'Male likelihood: {male_wh_pdf:.6f}')
+print(f'Female likelihood: {female_wh_pdf:.6f}')
+print(f'This individual is {male_wh_pdf / female_wh_pdf:.2f} times more likely to be a Man than a Woman based on Waist-to-Hip Ratio.')
+
+# Average likelihood
+average_likelihood = ((male_height_pdf / female_height_pdf) + (male_wh_pdf / female_wh_pdf)) / 2
+print(f'On average, this individual is {average_likelihood:.2f} times more likely to be a Man than a Woman.')
