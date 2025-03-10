@@ -1,26 +1,43 @@
-#Ready reckoner for exposure to diabetes.
-#Diabetes risk correlates closely with BMI/Blood Sugar & Age.
+# Ready reckoner for exposure to diabetes.
+# Diabetes risk correlates closely with BMI, Blood Sugar (HbA1c), and Age.
 
-print("Please enter your Age")
-Age = input()
-Age = int(Age)
-print("Please enter your Height")
-Height = input()
-Height = float(Height)
-print("Please enter your Weight")
-Weight = input()
-Weight = float(Weight)
-BMI = Weight/(Height**2)
-print("Please enter your HbA1c (blood sugar level)")
-HbA1c = input()
-HbA1c = int(HbA1c)
-Factor = (Age/42)*(BMI/25)*(HbA1c/48)
-print("Your risk factor for Diabetes with a norm of 1.0 is", Factor,"x normal" )
-if (Factor >= 0 and Factor < 1):
-    print("You are below average risk")
-if (Factor >= 1 and Factor < 1.5):
-    print("You are average risk")
-if Factor >= 1.5:
-    print("You are above average risk")
-if Factor >= 2:
-    print("You are high risk")
+# Function to calculate BMI
+def calculate_bmi(weight, height):
+    return weight / (height ** 2)
+
+# Function to calculate diabetes risk factor
+def calculate_risk_factor(age, bmi, hba1c):
+    return (age / 42) * (bmi / 25) * (hba1c / 48)
+
+# Function to determine risk level based on risk factor
+def determine_risk_level(factor):
+    if 0 <= factor < 1:
+        return "You are below average risk"
+    elif 1 <= factor < 1.5:
+        return "You are average risk"
+    elif 1.5 <= factor < 2:
+        return "You are above average risk"
+    else:
+        return "You are high risk"
+
+# Main function to gather inputs and display results
+def main():
+    # Gathering user inputs
+    age = int(input("Please enter your Age: "))
+    height = float(input("Please enter your Height (in meters): "))
+    weight = float(input("Please enter your Weight (in kilograms): "))
+    hba1c = int(input("Please enter your HbA1c (blood sugar level): "))
+    
+    # Calculating BMI
+    bmi = calculate_bmi(weight, height)
+    
+    # Calculating Diabetes Risk Factor
+    factor = calculate_risk_factor(age, bmi, hba1c)
+    
+    # Displaying results
+    print(f"Your risk factor for Diabetes with a norm of 1.0 is {factor:.2f}x normal.")
+    print(determine_risk_level(factor))
+
+# Running the main function
+if __name__ == "__main__":
+    main()
