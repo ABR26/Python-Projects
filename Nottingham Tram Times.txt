@@ -1,126 +1,54 @@
-# Nottingham Tram Network - Trip Time Calculator.
-Clifton = {"Clifton South":21,"Summerwood Lane":20,"Holy Trinity":19,"Clifton Centre":16,"Rivergreen":15,"Southchurch Drive North":13.5,"Ruddington Lane":11,"Compton Acres":10,"Wilford Lane":8,"Wilford Village":4,"Meadows Embankment":3,"Queens Walk":1.5,"Station":0}
-Toton = {"Toton":31,"Inham Road":29,"Eskdale Drive":27,"Bramcote Lane":25,"Cator Lane":23,"High Road":21,"Chilwell Road":20,"Beeston Centre":18,"Middle Street":16,"University Boulevard":14,"University Of Nottingham":10,"QMC":8,"Gregory Street":6.5,"NG2":4,"Meadows Way West":2.5,"Station":0}
-Hucknall = {"Hucknall":11,"Butlers Hill":8,"Moor Bridge":6,"Bulwell Forest":4,"Bulwell":2,"Highbury Vale":0,"David Lane":19,"Basford":18, "Wilkinson Street":16,"Radford Road":14,"Hyson Green Market":12,"The Forest":10,"High School":8,"Nottingham Trent University":5.5,"Royal Centre": 4,"Old Market Square": 3, "Lace Market":1.5, "Station":0}
-Phoenix = {"Phoenix":25,"CinderHill":23,"Highbury Vale":22,"David Lane":19,"Basford":18, "Wilkinson Street":16,"Radford Road":14,"Hyson Green Market":12,"The Forest":10,
-"High School":8,"Nottingham Trent University":5.5,"Royal Centre": 4,"Old Market Square": 3, "Lace Market":1.5, "Station":0}
-print("Welcome to the Nottingham Tram Network Journey time calculator:")
-print("Please type your first station name")
-Station1 = input()
-print("Please type your first station line")
-Line1 = input()
-print("Please type your second station name")
-Station2 = input()
-print("Please type your second station line")
-Line2 = input()
-if Line1 == "Phoenix" and Line2 == "Toton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Phoenix.get(Station1))
-    Time2 = int(Toton.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line1 == "Toton" and Line2 == "Phoenix":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Toton.get(Station1))
-    Time2 = int(Phoenix.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line1 == "Phoenix" and Line2 == "Clifton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Phoenix.get(Station1))
-    Time2 = int(Clifton.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line1 == "Clifton" and Line2 == "Phoenix":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station1))
-    Time2 = int(Phoenix.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line1 == "Clifton" and Line2 == "Toton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station1))
-    Time2 = int(Toton.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line2 == "Clifton" and Line1 == "Toton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station2))
-    Time2 = int(Toton.get(Station1))
-    Time = Time1+Time2
-    print("Your trip time is", Time, "Minutes")
-    exit()
-if Line1 == "Clifton" and Line2 == "Hucknall": 
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station1))
-    Time2 = int(Hucknall.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line2 == "Clifton" and Line1 == "Hucknall": 
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station2))
-    Time2 = int(Hucknall.get(Station1))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line1 == "Hucknall" and Line2 == "Toton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Hucknall.get(Station1))
-    Time2 = int(Toton.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if Line2 == "Hucknall" and Line1 == "Toton": 
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Toton.get(Station1))
-    Time2 = int(Hucknall.get(Station2))
-    Time = Time1+Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if (Line1 and Line2) == "Toton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Toton.get(Station1))
-    Time2 = int(Toton.get(Station2))
-    Time = Time1-Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if (Line1 and Line2) == "Hucknall":
-    Time = 0
-    #Time = int(Time)
-    Time1 = int(Hucknall.get(Station1))
-    Time2 = int(Hucknall.get(Station2))
-    Time = Time1-Time2
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if (Line1 and Line2) == "Clifton":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Clifton.get(Station1))
-    Time2 = int(Clifton.get(Station2))
-    Time = (Time1-Time2)
-    print("Your trip time is", Time , "Minutes")
-    exit()
-if (Line1 and Line2) == "Phoenix":
-    Time = 0
-    Time = int(Time)
-    Time1 = int(Phoenix.get(Station1))
-    Time2 = int(Phoenix.get(Station2))
-    Time = (Time1-Time2)
-    print("Your trip time is", Time , "Minutes")
+# Define the tram lines and their station times
+Clifton = {
+    "Clifton South": 21, "Summerwood Lane": 20, "Holy Trinity": 19, "Clifton Centre": 16, "Rivergreen": 15,
+    "Southchurch Drive North": 13.5, "Ruddington Lane": 11, "Compton Acres": 10, "Wilford Lane": 8, "Wilford Village": 4,
+    "Meadows Embankment": 3, "Queens Walk": 1.5, "Station": 0
+}
+
+Toton = {
+    "Toton": 31, "Inham Road": 29, "Eskdale Drive": 27, "Bramcote Lane": 25, "Cator Lane": 23, "High Road": 21,
+    "Chilwell Road": 20, "Beeston Centre": 18, "Middle Street": 16, "University Boulevard": 14,
+    "University Of Nottingham": 10, "QMC": 8, "Gregory Street": 6.5, "NG2": 4, "Meadows Way West": 2.5, "Station": 0
+}
+
+Hucknall = {
+    "Hucknall": 11, "Butlers Hill": 8, "Moor Bridge": 6, "Bulwell Forest": 4, "Bulwell": 2, "Highbury Vale": 0,
+    "David Lane": 19, "Basford": 18, "Wilkinson Street": 16, "Radford Road": 14, "Hyson Green Market": 12,
+    "The Forest": 10, "High School": 8, "Nottingham Trent University": 5.5, "Royal Centre": 4, "Old Market Square": 3,
+    "Lace Market": 1.5, "Station": 0
+}
+
+Phoenix = {
+    "Phoenix": 25, "CinderHill": 23, "Highbury Vale": 22, "David Lane": 19, "Basford": 18, "Wilkinson Street": 16,
+    "Radford Road": 14, "Hyson Green Market": 12, "The Forest": 10, "High School": 8, "Nottingham Trent University": 5.5,
+    "Royal Centre": 4, "Old Market Square": 3, "Lace Market": 1.5, "Station": 0
+}
+
+# Function to calculate trip time
+def calculate_trip_time(line1, station1, line2, station2):
+    time1 = line1.get(station1, None)
+    time2 = line2.get(station2, None)
+    if time1 is not None and time2 is not None:
+        return abs(time1 - time2)
+    return None
+
+# Main program
+print("Welcome to the Nottingham Tram Network Journey Time Calculator!")
+station1 = input("Please type your first station name: ")
+line1_name = input("Please type your first station line (Clifton/Toton/Hucknall/Phoenix): ")
+station2 = input("Please type your second station name: ")
+line2_name = input("Please type your second station line (Clifton/Toton/Hucknall/Phoenix): ")
+
+lines = {"Clifton": Clifton, "Toton": Toton, "Hucknall": Hucknall, "Phoenix": Phoenix}
+
+line1 = lines.get(line1_name)
+line2 = lines.get(line2_name)
+
+if line1 and line2:
+    trip_time = calculate_trip_time(line1, station1, line2, station2)
+    if trip_time is not None:
+        print(f"Your trip time is {trip_time} minutes.")
+    else:
+        print("Invalid station name provided.")
+else:
+    print("Invalid line name provided.")
