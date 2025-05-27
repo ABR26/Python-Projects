@@ -1,0 +1,25 @@
+import random
+Result = []
+Destiny = []
+for i in range(30):
+    Eq = 65
+    Ca = 35
+    p = 0
+    for i in range(10):
+        Eq = Eq*(float(1.05))*((random.randint(1,200)/100)) 
+        Ca = Ca*float(0.95)
+        Value= Eq+Ca  
+        #print("Value",Value) 
+        Eq = Value*float(0.65) 
+        Ca = Value*float(0.35)
+        if i==4:
+            #print(Value)
+            Result.insert(0,Value)
+            if Value<50:
+                #print("Low",Value)
+                Destiny.insert(0,Value)
+                print("Under 50:",len(Destiny))
+#ReturnUnitRisk = (sum(Result)/30)/((max(Result)-min(Result)))
+#print("X Bar",(sum(Result)/30))
+#print("Range",max(Result)-min(Result))
+#print('ReturnUnitRisk...X Bar / Range ',ReturnUnitRisk) 
